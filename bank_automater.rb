@@ -1,16 +1,25 @@
-require 'rubygems'
-require 'mechanize'
-require 'pry'
+require 'bundler/setup'
+Bundler.require(:default)
 
-agent = Mechanize.new
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
-login_page = agent.get('https://schwab.com/')
-sign_on_form = login_page.form('SignonForm')
-sign_on_form.SignonAccountNumber = ENV['SCHWAB_USERNAME']
-sign_on_form.SignonPassword = ENV['SCHWAB_PASSWORD']
+def main
+  landing_page = login
+  transfers_page = landing_page.link_with(text: 'Transfers & Payments').click
+end
 
-landing_page = agent.submit(sign_on_form, sign_on_form.buttons.first)
+def login  
+  login_page = agent.get('https://schwab.com/')
+  sign_on_form = login_page.form('SignonForm')
+  sign_on_form.SignonAccountNumber = ENV['SCHWAB_USERNAME']
+  sign_on_form.SignonPassword = ENV['SCHWAB_PASSWORD']
+  agent.submit(sign_on_form, sign_on_form.buttons.first)
+end
 
-transfers_page = landing_page.link_with(text: 'Transfers & Payments').click
+def agent
+  @agent ||= Mechanize.new
+end
+
+main
 
 
