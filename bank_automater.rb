@@ -1,12 +1,16 @@
 require 'rubygems'
 require 'mechanize'
+require 'pry'
 
 agent = Mechanize.new
 
-page = agent.get('https://schwab.com/')
-sign_on_form = page.form('SignonForm')
+login_page = agent.get('https://schwab.com/')
+sign_on_form = login_page.form('SignonForm')
 sign_on_form.SignonAccountNumber = ENV['SCHWAB_USERNAME']
 sign_on_form.SignonPassword = ENV['SCHWAB_PASSWORD']
 
-# google_page = agent.get('http://google.com/')
-# pp google_page
+landing_page = agent.submit(sign_on_form, sign_on_form.buttons.first)
+
+transfers_page = landing_page.link_with(text: 'Transfers & Payments').click
+
+
