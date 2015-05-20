@@ -8,3 +8,4 @@ gem 'pry'
 gem 'plaid', git: 'git://github.com/plaid/plaid-ruby'
 gem 'httparty'
 
+gem "watir", "~>4.0"

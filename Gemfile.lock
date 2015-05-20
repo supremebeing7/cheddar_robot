@@ -7,9 +7,13 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    childprocess (0.5.6)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.0)
+    commonwatir (4.0.0)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
+    ffi (1.9.8)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.13.4)
@@ -28,6 +32,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.5)
     mini_portile (0.6.2)
+    multi_json (1.11.0)
     multi_xml (0.5.5)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -38,11 +43,23 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    rubyzip (1.1.7)
+    selenium-webdriver (2.45.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     slop (3.6.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    watir (4.0.2)
+      commonwatir (~> 4)
+      watir-webdriver
+    watir-webdriver (0.7.0)
+      selenium-webdriver (>= 2.45)
     webrobots (0.1.1)
+    websocket (1.2.2)
 
 PLATFORMS
   ruby
@@ -52,3 +69,4 @@ DEPENDENCIES
   mechanize
   plaid!
   pry
+  watir (~> 4.0)
